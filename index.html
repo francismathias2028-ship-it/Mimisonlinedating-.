@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIMI'S ONLINE DATING 💕</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Dancing+Script:wght@400;700&display=swap');
+
+        :root {
+            --pink: #ff69b4;
+            --rose: #ff1493;
+            --softpink: #fff0f5;
+            --darkrose: #c71585;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+            color: #333;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: var(--rose);
+            opacity: 0.6;
+            animation: floatHeart 15s linear infinite;
+            text-shadow: 0 0 10px var(--pink);
+        }
+
+        @keyframes floatHeart {
+            0 { transform: translateY(100vh) rotate(0deg); opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .butterfly {
+            position: absolute;
+            font-size: 24px;
+            animation: flyButterfly 18s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes flyButterfly {
+            0% { transform: translateY(100vh) translateX(0); }
+            50% { transform: translateY(40vh) translateX(60px) scale(1.1); }
+            100% { transform: translateY(-100vh) translateX(-40px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.8rem;
+            color: var(--rose);
+            text-shadow: 0 4px 15px rgba(255, 20, 147, 0.2);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 40px 20px 30px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            color: var(--darkrose);
+            margin-bottom: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .services {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 25px;
+            width: 320px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.15);
+            transition: all 0.4s ease;
+            text-align: center;
+            border: 2px solid #ffe4e1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(255, 105, 180, 0.25);
+        }
+
+        .price {
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: var(--darkrose);
+            margin: 10px 0;
+        }
+
+        .intro-notice-card {
+            background: white;
+            border: 2px dashed var(--pink);
+            border-radius: 25px;
+            padding: 35px 30px;
+            max-width: 750px;
+            margin: 40px auto 20px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.1);
+        }
+
+        .intro-notice-card h3 {
+            color: var(--darkrose);
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.4rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .intro-notice-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 18px;
+        }
+
+        .intro-notice-card strong {
+            color: var(--darkrose);
+        }
+
+        form {
+            background: white;
+            border-radius: 30px;
+            padding: 45px 35px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
+            max-width: 750px;
+            margin: 0 auto 30px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--darkrose);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #ffe4e1;
+            border-radius: 15px;
+            font-size: 1.05rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--rose);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(255, 20, 147, 0.12);
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            background: #fffafc;
+            cursor: pointer;
+        }
+
+        .privacy-hint {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .options {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0 25px;
+        }
+
+        .option-btn {
+            flex: 1;
+            padding: 18px 12px;
+            border: 2px solid #ffe4e1;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+            background: #fff;
+            color: #555;
+        }
+
+        .option-btn:hover {
+            border-color: var(--pink);
+            background: #fffafc;
+        }
+
+        .option-btn.active {
+            border-color: var(--rose);
+            background: var(--softpink);
+            color: var(--darkrose);
+            transform: scale(1.02);
+            box-shadow: inset 0 0 10px rgba(255, 20, 147, 0.05);
+        }
+
+        .book-btn {
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.35rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.35);
+            transition: all 0.4s ease;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 20, 147, 0.45);
+        }
+
+        .success {
+            display: none;
+            text-align: center;
+            padding: 50px 30px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.2);
+            max-width: 750px;
+            margin: 40px auto;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 25px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.35);
+            transition: all 0.4s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.45);
+        }
+
+        .blinking {
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0.85; transform: scale(0.99); }
+        }
+
+        @media (max-width: 600px) {
+            .options {
+                flex-direction: column;
+            }
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            form, .intro-notice-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts" id="hearts"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo">MIMI'S ONLINE DATING 💕</h1>
+        </header>
+
+        <div class="hero">
+            <h1>Find Your Forever Love ✨</h1>
+            <p style="font-size: 1.8rem; margin: 15px 0; font-family: 'Dancing Script', cursive; color: var(--darkrose);">
+                Where hearts connect in the most beautiful way
+            </p>
+            <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #555; line-height: 1.5;">
+                Hi, I'm Mimi 💕 I personally match genuine singles every day from 7PM West Africa Time (WAT)
+            </p>
+        </div>
+
+        <div class="services">
+            <div class="service-card">
+                <h3>🌟 TikTok Live Match</h3>
+                <div class="price">$25</div>
+                <p style="color: #666; line-height: 1.4;">Live romantic session with your match. Real-time connection.</p>
+                <small style="display:block; margin-top:10px; color: var(--darkrose);"><strong>Book early</strong> to save your spot!</small>
+            </div>
+            <div class="service-card">
+                <h3>💬 WhatsApp Connection</h3>
+                <div class="price">$10</div>
+                <p style="color: #666; line-height: 1.4;">Private & direct introduction with your perfect match.</p>
+            </div>
+        </div>
+
+        <!-- Welcome & Privacy Intro Card -->
+        <div class="intro-notice-card">
+            <h3>A Personal Message From Mimi 💖</h3>
+            <p>This is a private one-on-one matchmaking session with me personally. In this session, I work directly with you to understand exactly what you are looking for in a partner - your values, preferences, relationship goals, and your preferred location.</p>
+            
+            <p><strong>This is not a group call and not automated.</strong> It is just you and me, one-on-one, with my full attention on helping you find a partner that truly aligns with what you desire.</p>
+            
+            <p>Your privacy is fully respected and protected. Everything we discuss during this session is <strong>100% private and confidential</strong>. Nothing will ever be shared, posted, or discussed on social media or with anyone else. What is said between us stays strictly between us.</p>
+            
+            <p style="border-top: 1px solid #ffe4e1; padding-top: 15px; margin-bottom: 0; font-style: italic; color: #666; text-align: center;">
+                This service is for serious individuals who are ready for intentional, meaningful connections and want personal, discreet, and professional matchmaking support.
+            </p>
+        </div>
+
+        <form id="matchForm">
+            <h2 style="text-align:center; color: var(--darkrose); margin-bottom:30px; font-size:2rem; font-family: 'Dancing Script', cursive;">
+                Let's Find Your Soulmate 💖
+            </h2>
+
+            <div class="form-group">
+                <label>What's your beautiful name?</label>
+                <input type="text" id="name" required placeholder="e.g. Grace">
+            </div>
+
+            <div class="form-group">
+                <label>Your Gender</label>
+                <select id="gender" required>
+                    <option value="">Select</option>
+                    <option value="Woman">Woman</option>
+                    <option value="Man">Man</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Your Age</label>
+                <input type="number" id="age" required min="18" max="70" placeholder="You must be 18 or older">
+            </div>
+
+            <div class="form-group">
+                <label>Your Country</label>
+                <input type="text" id="country" required placeholder="e.g. Nigeria, Ghana, Malawi">
+            </div>
+
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" id="city" required placeholder="e.g. Lagos, Lusaka, Pretoria">
+            </div>
+
+            <div class="form-group">
+                <label>I would love to meet someone aged between:</label>
+                <div style="display:flex; gap:15px;">
+                    <input type="number" id="ageMin" placeholder="Min Age" style="width:50%;" min="18">
+                    <input type="number" id="ageMax" placeholder="Max Age" style="width:50%;" min="18">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Preferred Match Gender</label>
+                <select id="preferredGender" required>
+                    <option value="">Select</option>
+                    <option value="Man">Man</option>
+                    <option value="Woman">Woman</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tell me about the kind of love you're looking for 💕</label>
+                <textarea id="preferences" rows="3" placeholder="I want someone kind, loving, ready for a serious relationship..."></textarea>
+            </div>
+
+            <h3 style="text-align:center; margin:25px 0 15px; color: var(--darkrose); font-size: 1.2rem;">
+                How would you like to connect?
+            </h3>
+
+            <div class="options">
+                <div class="option-btn" id="tiktokBtn" type="button">
+                    🌟 TikTok Live Match - $25
+                </div>
+                <div class="option-btn" id="whatsappBtn" type="button">
+                    💬 WhatsApp Connection - $10
+                </div>
+            </div>
+
+            <div id="tiktokFields" class="form-group" style="display:none;">
+                <label>Your TikTok Username</label>
+                <input type="text" id="tiktok" placeholder="@yourusername">
+            </div>
+
+            <!-- ALL WHATSAPP FIELDS WITH DYNAMIC SUBFIELDS -->
+            <div id="whatsappFields" style="display:none;">
+                <div class="form-group">
+                    <label>Your WhatsApp Number (with country code)</label>
+                    <input type="tel" id="whatsapp" placeholder="+2547xxxxxxxx">
+                </div>
+
+                <!-- 1. Expanded HIV Status Menu -->
+                <div class="form-group">
+                    <label>What is your HIV Status & Matching Preference? 🩺</label>
+                    <select id="hivStatus">
+                        <option value="">Select Option</option>
+                        <option value="Positive (Looking for Positive)">I am HIV Positive & looking for an HIV Positive partner</option>
+                        <option value="Positive (Looking for Negative)">I am HIV Positive & looking for an HIV Negative partner</option>
+                        <option value="Positive (Open to any status)">I am HIV Positive & open to any status</option>
+                        <option value="Negative (Looking for Negative)">I am HIV Negative & looking for an HIV Negative partner</option>
+                        <option value="Negative (Looking for Positive)">I am HIV Negative & looking for an HIV Positive partner</option>
+                        <option value="Negative (Open to any status)">I am HIV Negative & open to any status</option>
+                        <option value="Status private / Open to any">My status is private / I am open to any status</option>
+                    </select>
+                </div>
+
+                <!-- 2. Email Field -->
+                <div class="form-group">
+                    <label>Your Email Address (Optional)</label>
+                    <input type="email" id="email" placeholder="e.g. grace@example.com">
+                </div>
+
+                <!-- International Connection Selector -->
+                <div class="form-group">
+                    <label>Ok we do outside connections to various nations, which one do you prefer your soulmate to come from among these? 🌍</label>
+                    <select id="soulmateCountry" onchange="toggleCustomCountryField()">
+                        <option value="">Select Country</option>
+                        <option value="Canada 🇨🇦">Canada 🇨🇦</option>
+                        <option value="Germany 🇩🇪">Germany 🇩🇪</option>
+                        <option value="UK 🇬🇧">UK 🇬🇧</option>
+                        <option value="USA 🇺🇸">USA 🇺🇸</option>
+                        <option value="France 🇫🇷">France 🇫🇷</option>
+                        <option value="Australia 🇦🇺">Australia 🇦🇺</option>
+                        <option value="Brazil 🇧🇷">Brazil 🇧🇷</option>
+                        <option value="Kenya 🇰🇪">Kenya 🇰🇪</option>
+                        <option value="Rwanda 🇷🇼">Rwanda 🇷🇼</option>
+                        <option value="Ethiopia 🇪🇹">Ethiopia 🇪🇹</option>
+                        <option value="South Africa 🇿🇦">South Africa 🇿🇦</option>
+                        <option value="Uganda 🇺🇬">Uganda 🇺🇬</option>
+                        <option value="Tanzania 🇹🇿">Tanzania 🇹🇿</option>
+                        <option value="DR Congo 🇨🇩">DR Congo 🇨🇩</option>
+                        <option value="Zimbabwe 🇿🇼">Zimbabwe 🇿🇼</option>
+                        <option value="Ivory Coast 🇨🇮">Ivory Coast 🇨🇮</option>
+                        <option value="Nigeria 🇳🇬">Nigeria 🇳🇬</option>
+                        <option value="Ghana 🇬🇭">Ghana 🇬🇭</option>
+                        <option value="Burundi 🇧🇮">Burundi 🇧🇮</option>
+                        <option value="Swaziland 🇸🇿">Swaziland 🇸🇿</option>
+                        <option value="Liberia 🇱🇷">Liberia 🇱🇷</option>
+                        <option value="Zambia 🇿🇲">Zambia 🇿🇲</option>
+                        <option value="None of the above">None of the above</option>
+                    </select>
+                </div>
+
+                <!-- Conditional Custom Country Entry Field -->
+                <div class="form-group" id="customCountryWrapper" style="display: none;">
+                    <label>Please specify the country you prefer your soulmate to come from: ✏️</label>
+                    <input type="text" id="customSoulmateCountry" placeholder="e.g. Malawi, Botswana, South Sudan">
+                </div>
+
+                <!-- 3. Photo Upload Blocks -->
+                <div class="form-group">
+                    <label>Upload Two Clear Photos of Yourself 📸</label>
+                    <div style="display:flex; gap:15px; margin-bottom: 8px;">
+                        <input type="file" id="photo1" accept="image/*" style="width:50%;">
+                        <input type="file" id="photo2" accept="image/*" style="width:50%;">
+                    </div>
+                    <span class="privacy-hint">🔒 Your photos are safe. They are fully confidential and will never be shared or posted on social media.</span>
+                </div>
+            </div>
+
+            <button type="submit" class="book-btn blinking">Book My Match Now 💖</button>
+        </form>
+    </div>
+
+    <!-- Success Output Screen -->
+    <div id="successMessage" class="success">
+        <h2>Thank you, <span id="userName"></span>! 💕</h2>
+        <p style="font-size: 1.25rem; line-height: 1.6; margin-top: 15px;">
+            Your request has been received with love. I will personally review your details and prepare the best possible match for you.
+        </p>
+        <p style="margin: 25px 0; font-size: 1.4rem; color: var(--darkrose); font-family: 'Dancing Script', cursive; font-weight: bold;">
+            I'm so excited to help you find your special someone ✨
+        </p>
+        
+        <a href="#" id="dynamicWhatsAppBtn" class="whatsapp-btn" target="_blank">
+            💬 Message Me on WhatsApp Now If You are Ready
+        </a>
+        
+        <p style="margin-top: 20px; color: #666; font-size: 0.95rem;">
+            Click the button above to let me know you're ready. I'll reply as soon as possible.
+        </p>
+        
+        <button onclick="window.location.reload()" style="background: var(--softpink); color: var(--darkrose); border:none; padding:12px 30px; border-radius:50px; cursor:pointer; margin-top:25px; font-weight: bold;">
+            Book Another Match
+        </button>
+    </div>
+
+    <script>
+        const BOT_TOKEN = "8726744264:AAFHGJQnZ8I-dQqxrQBJ_cbPBuCOY00YnHM";   
+        const CHAT_ID = "8411590614";       
+
+        // Dynamic background particles
+        function createFloatingElements() {
+            const heartsContainer = document.getElementById('hearts');
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = ['❤️', '💕', '💖', '💗', '💘'][Math.floor(Math.random()*5)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 8 + 10) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                heartsContainer.appendChild(heart);
+                setTimeout(() => heart.remove(), 12000);
+            }, 500);
+
+            setInterval(() => {
+                const butterfly = document.createElement('div');
+                butterfly.className = 'butterfly';
+                butterfly.textContent = ['🦋', '🌸'][Math.floor(Math.random()*2)];
+                butterfly.style.left = Math.random() * 100 + 'vw';
+                butterfly.style.animationDuration = (Math.random() * 10 + 12) + 's';
+                heartsContainer.appendChild(butterfly);
+                setTimeout(() => butterfly.remove(), 15000);
+            }, 1200);
+        }
+
+        let selectedService = null;
+
+        // Toggle handling function for the Custom Country Field
+        function toggleCustomCountryField() {
+            const selection = document.getElementById('soulmateCountry').value;
+            const customField = document.getElementById('customCountryWrapper');
+            if (selection === "None of the above") {
+                customField.style.display = "block";
+                document.getElementById('customSoulmateCountry').setAttribute('required', 'true');
+            } else {
+                customField.style.display = "none";
+                document.getElementById('customSoulmateCountry').removeAttribute('required');
+            }
+        }
+
+        document.getElementById('tiktokBtn').addEventListener('click', () => {
+            selectedService = 'tiktok';
+            document.getElementById('tiktokBtn').classList.add('active');
+            document.getElementById('whatsappBtn').classList.remove('active');
+            document.getElementById('tiktokFields').style.display = 'block';
+            document.getElementById('whatsappFields').style.display = 'none';
+            document.getElementById('tiktok').setAttribute('required', 'true');
+            document.getElementById('whatsapp').removeAttribute('required');
+            document.getElementById('hivStatus').removeAttribute('required');
+            document.getElementById('soulmateCountry').removeAttribute('required');
+        });
+
+        document.getElementById('whatsappBtn').addEventListener('click', () => {
+            selectedService = 'whatsapp';
+            document.getElementById('whatsappBtn').classList.add('active');
+            document.getElementById('tiktokBtn').classList.remove('active');
+            document.getElementById('tiktokFields').style.display = 'none';
+            document.getElementById('whatsappFields').style.display = 'block';
+            document.getElementById('whatsapp').setAttribute('required', 'true');
+            document.getElementById('hivStatus').setAttribute('required', 'true');
+            document.getElementById('soulmateCountry').setAttribute('required', 'true');
+            document.getElementById('tiktok').removeAttribute('required');
+        });
+
+        // Binary Photo Uploader function helper
+        async function uploadPhotoToTelegram(file) {
+            const formData = new FormData();
+            formData.append('chat_id', CHAT_ID);
+            formData.append('photo', file);
+
+            try {
+                let res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+                return res.ok;
+            } catch (err) {
+                console.error("Photo delivery error:", err);
+                return false;
+            }
+        }
+
+        // Processing form logic execution
+        document.getElementById('matchForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!selectedService) {
+                alert("Please pick how you would like to connect! (TikTok or WhatsApp) 💕");
+                return;
+            }
+
+            const name = document.getElementById('name').value.trim();
+            const minAge = document.getElementById('ageMin').value || 'Any';
+            const maxAge = document.getElementById('ageMax').value || 'Any';
+            
+            // Extract the fields
+            const hivVal = document.getElementById('hivStatus').value || 'Not Provided/TikTok path';
+            const emailVal = document.getElementById('email').value || 'None';
+            
+            const chosenCountry = document.getElementById('soulmateCountry').value;
+            const customCountry = document.getElementById('customSoulmateCountry').value.trim();
+            const finalSoulmateCountry = chosenCountry === "None of the above" ? customCountry : chosenCountry;
+
+            const formData = {
+                name: name,
+                gender: document.getElementById('gender').value,
+                age: document.getElementById('age').value,
+                country: document.getElementById('country').value,
+                city: document.getElementById('city').value,
+                preferredAge: `${minAge}-${maxAge}`,
+                preferredGender: document.getElementById('preferredGender').value,
+                service: selectedService === 'tiktok' ? 'TikTok Live Match - $25' : 'WhatsApp Connection - $10',
+                contactInfo: selectedService === 'tiktok' 
+                    ? 'TikTok: ' + document.getElementById('tiktok').value 
+                    : 'WhatsApp: ' + document.getElementById('whatsapp').value,
+                hivStatus: hivVal,
+                email: emailVal,
+                soulmateCountry: finalSoulmateCountry || 'Not Selected/TikTok path',
+                preferences: document.getElementById('preferences').value,
+                timestamp: new Date().toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })
+            };
+
+            // Prep success interface variables dynamically
+            document.getElementById('userName').textContent = name;
+            
+            const waMessage = `Hi Mimi, my name is ${encodeURIComponent(name)}. I just booked a match and I'm ready to connect! 💕`;
+            const waUrl = `https://wa.me/254757604108?text=${waMessage}`;
+            document.getElementById('dynamicWhatsAppBtn').setAttribute('href', waUrl);
+
+            document.getElementById('matchForm').style.display = 'none';
+            const introCard = document.querySelector('.intro-notice-card');
+            if (introCard) introCard.style.display = 'none';
+            
+            document.getElementById('successMessage').style.display = 'block';
+
+            // Telegram API text format pattern compilation
+            const message = `💕 *New Match Booking from Mimi's HeartMatch!*\n\n` +
+                            `👤 *Name:* ${formData.name}\n` +
+                            `⚧ *Gender:* ${formData.gender}\n` +
+                            `🎂 *Age:* ${formData.age}\n` +
+                            `📍 *Location:* ${formData.city}, ${formData.country}\n` +
+                            `🌍 *Soulmate Origin:* ${formData.soulmateCountry}\n` +
+                            `💞 *Looking for:* ${formData.preferredGender} (${formData.preferredAge})\n\n` +
+                            `🔥 *Service:* ${formData.service}\n` +
+                            `📞 *Contact:* ${formData.contactInfo}\n` +
+                            `📧 *Email:* ${formData.email}\n` +
+                            `🩺 *HIV Status/Preference:* ${formData.hivStatus}\n\n` +
+                            `💬 *Preferences:* ${formData.preferences || 'None provided'}\n\n` +
+                            `🕒 *Time:* ${formData.timestamp}`;
+
+            // Send textual report details safely
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+            } catch (error) {
+                console.error("Telegram Text Submission Error:", error);
+            }
+
+            // Deliver separate pictures to channel bot if selected WhatsApp
+            if (selectedService === 'whatsapp') {
+                const img1 = document.getElementById('photo1').files[0];
+                const img2 = document.getElementById('photo2').files[0];
+
+                if (img1) await uploadPhotoToTelegram(img1);
+                if (img2) await uploadPhotoToTelegram(img2);
+            }
+
+            // Deep link auto redirect window loader sequence after 3 seconds
+            setTimeout(() => {
+                window.open(waUrl, '_blank');
+            }, 3000);
+        });
+
+        window.onload = function() {
+            createFloatingElements();
+        };
+    </script>
+</body>
+</html>
